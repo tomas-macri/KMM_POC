@@ -102,12 +102,16 @@ kotlin {
 
             }
         }
-        val androidTest by getting {
+
+        //getByName("androidInstrumentedTest") { tambien funciona
+        //SE DEBE RENOMBRAR DE androidTest a androidInstrumentedTest ("poc-kmm tomas/shared/src/androidInstrumentedTest")
+        named("androidInstrumentedTest") {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation(Deps.Test.junit)
             }
         }
+
         val iosX64Main by getting
         val iosArm64Main by getting
         //val iosSimulatorArm64Main by getting
