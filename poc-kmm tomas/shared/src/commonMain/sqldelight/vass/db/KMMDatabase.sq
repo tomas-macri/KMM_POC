@@ -1,6 +1,6 @@
 CREATE TABLE QuoteEntity(
 id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-quote TEXT NOT NULL,
+message TEXT NOT NULL,
 author TEXT NOT NULL
 );
 
@@ -8,7 +8,7 @@ getQuotes:
 SELECT * FROM QuoteEntity;
 
 insertQuote:
-INSERT OR FAIL INTO QuoteEntity (id, quote, author) VALUES (?,?, ?);
+INSERT OR FAIL INTO QuoteEntity (id, message, author) VALUES (?,?, ?);
 
 resetQuotes:
 DELETE FROM QuoteEntity;
