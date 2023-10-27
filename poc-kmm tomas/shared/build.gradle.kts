@@ -104,6 +104,7 @@ kotlin {
         }
 
         //getByName("androidInstrumentedTest") { tambien funciona
+        //SE DEBE RENOMBRAR DE androidTest a androidInstrumentedTest ("poc-kmm tomas/shared/src/androidInstrumentedTest")
         named("androidInstrumentedTest") {
             dependencies {
                 implementation(kotlin("test-junit"))
