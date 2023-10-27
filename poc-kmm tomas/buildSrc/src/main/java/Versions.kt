@@ -9,9 +9,8 @@ object Versions {
     const val androidTargetSdk = androidCompileSdk
 
     const val corutinesVersion = "1.6.0-native-mt"
-    const val koin = "3.1.4"
+    const val koin = "3.3.2"
 
-    //const val ktor = "2.0.0-beta-1"
     const val ktor = "2.0.0-beta-1"
 
     const val kotlinxSerialization = "1.3.2"
@@ -20,6 +19,8 @@ object Versions {
     const val material = "1.5.0"
     const val activityCompose = "1.8.0"
     const val compose = "1.4.2"
+    const val compose_runtime = "1.5.4"
+    const val koin_compose = "3.4.1"
     const val lifecycleExtension = "2.2.0-beta01"
 
     const val kermit = "1.0.0"
@@ -60,6 +61,9 @@ object Deps {
         const val foundationLayout =
             "androidx.compose.foundation:foundation-layout:${Versions.compose}"
         const val material = "androidx.compose.material:material:${Versions.compose}"
+
+        const val runtime = "androidx.compose.runtime:runtime-livedata:${Versions.compose_runtime}"
+        const val koin = "io.insert-koin:koin-androidx-compose:${Versions.koin_compose}"
     }
 
     object Koin {

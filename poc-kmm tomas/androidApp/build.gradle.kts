@@ -95,6 +95,10 @@ dependencies {
         implementation(uiGraphics)
         implementation(foundationLayout)
         implementation(material)
+
+        implementation(runtime)
+        implementation(koin)
+
     }
 
 
