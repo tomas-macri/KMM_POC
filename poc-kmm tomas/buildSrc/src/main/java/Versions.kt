@@ -15,7 +15,7 @@ object Versions {
     const val ktor = "2.0.0-beta-1"
 
     const val kotlinxSerialization = "1.3.2"
-    const val sqlDelight = "1.5.3"
+    const val sqlDelight = "1.5.5"
 
     const val material = "1.5.0"
     const val activityCompose = "1.8.0"
