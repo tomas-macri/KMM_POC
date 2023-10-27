@@ -3,7 +3,7 @@ package com.vass.example.kmmapp.data.local.db
 import com.squareup.sqldelight.db.SqlDriver
 import sqldelight.vass.db.KMMDatabase
 
-internal expect class DatabaseDriverFactory {
+internal expect class DatabaseDriverFactory constructor() {
     internal fun createDriver(): SqlDriver
 }
 
