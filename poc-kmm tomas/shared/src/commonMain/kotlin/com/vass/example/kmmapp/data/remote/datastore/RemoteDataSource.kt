@@ -7,6 +7,8 @@ import com.vass.example.kmmappp.BuildKonfig
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 
 internal interface RemoteDataSource {
     suspend fun getQuote(): Quote?
@@ -15,15 +17,21 @@ internal interface RemoteDataSource {
 }
 
 internal class QuotesApiRemoteDataSource(
-    private val ktorClient: HttpClient
-): RemoteDataSource {
+    private val ktorClient: HttpClient,
+    private val dispatcher: CoroutineDispatcher
+) : RemoteDataSource {
     override suspend fun getQuote(): Quote? {
-        val response: List<QuoteDTO> = ktorClient.get("${BuildKonfig.apiUrl}quotes").body()
-        return response.firstOrNull()?.toQuote()
+        return withContext(dispatcher) {
+            val response: List<QuoteDTO> = ktorClient.get("${BuildKonfig.apiUrl}quotes").body()
+            response.firstOrNull()?.toQuote()
+        }
     }
 
     override suspend fun getQuotes(amount: Int): List<Quote> {
-        val response: List<QuoteDTO> = ktorClient.get("${BuildKonfig.apiUrl}quotes/$amount").body()
-        return response.map { it.toQuote() }
+        return withContext(dispatcher) {
+            val response: List<QuoteDTO> = ktorClient.get("${BuildKonfig.apiUrl}quotes/$amount").body()
+            response.map { it.toQuote() }
+        }
     }
+
 }
