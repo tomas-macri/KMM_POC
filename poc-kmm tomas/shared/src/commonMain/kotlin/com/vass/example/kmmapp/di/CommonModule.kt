@@ -9,6 +9,8 @@ import com.vass.example.kmmapp.data.remote.datastore.RemoteDataSource
 import com.vass.example.kmmapp.data.repository.QuotesRepository
 import com.vass.example.kmmapp.data.repository.QuotesRepositoryImpl
 import com.vass.example.kmmapp.domain.usecase.GetAnotherQuoteUseCase
+import com.vass.example.kmmapp.domain.usecase.GetAllQuotesUseCase
+import com.vass.example.kmmapp.domain.usecase.ResetQuotesUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
@@ -22,6 +24,8 @@ import org.koin.dsl.module
 val sharedModule = module {
     //Cosas que afectan al módulo shared
     factoryOf(::GetAnotherQuoteUseCase)
+    factoryOf(::GetAllQuotesUseCase)
+    factoryOf(::ResetQuotesUseCase)
     singleOf(::QuotesRepositoryImpl) bind QuotesRepository::class
     single { createDatabase(get()).kMMDatabaseQueries }
     factory { Dispatchers.Default }
