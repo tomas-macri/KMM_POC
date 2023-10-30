@@ -11,14 +11,20 @@ class MainViewModel constructor(
     val getAnotherQuoteUseCase: GetAnotherQuoteUseCase
 ): ViewModel() {
 
-    private val _inserted = MutableLiveData<Boolean>()
-    val inserted: LiveData<Boolean> = _inserted
+
+    private val _mainUiState = MutableLiveData(MainUiState())
+    val mainUiState: LiveData<MainUiState> = _mainUiState
+
     fun getAnotherQuote(){
+        setLoading()
         viewModelScope.launch {
             getAnotherQuoteUseCase().also {
-                _inserted.value = _inserted.value?.not()?:true
+                _mainUiState.value = _mainUiState.value?.copy(loading = false)
             }
         }
     }
 
+    private fun setLoading() {
+        _mainUiState.value = _mainUiState.value?.copy(loading = true, error = null)
+    }
 }

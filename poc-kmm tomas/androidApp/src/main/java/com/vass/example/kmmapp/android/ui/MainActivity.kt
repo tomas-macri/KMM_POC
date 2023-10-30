@@ -3,15 +3,17 @@ package com.vass.example.kmmapp.android.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.vass.example.kmmapp.android.ui.theme.KMMAppTheme
 import org.koin.androidx.compose.koinViewModel
@@ -24,8 +26,8 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     val viewModel: MainViewModel = koinViewModel()
-                    val inserted: Boolean by viewModel.inserted.observeAsState(false)
-                    Greeting("Android", inserted){
+                    val mainUiState: MainUiState by viewModel.mainUiState.observeAsState(MainUiState())
+                    Greeting("Android", mainUiState.loading) {
                         viewModel.getAnotherQuote()
                     }
                 }
@@ -35,18 +37,19 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, inserted: Boolean, onClick: () -> Unit) {
-    if (!inserted){
+fun Greeting(name: String, loading: Boolean, onClick: () -> Unit = {}) {
     Text(
         text = "Hello $name!",
-        modifier = Modifier.clickable {  onClick() }
+        modifier =
+        if (loading) {
+            Modifier
+                .background(Color.Yellow)
+        } else {
+            Modifier.background(Color.Green)
+                .clickable { onClick() }
+
+        },
     )
-    } else{
-        Text(
-            text = "Hello VAAAAAAAAA $name!",
-            modifier = Modifier.clickable {  onClick() }
-        )
-    }
 }
 
 @Preview(showBackground = true)
