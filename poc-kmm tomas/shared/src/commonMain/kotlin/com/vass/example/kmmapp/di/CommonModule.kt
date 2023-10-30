@@ -8,9 +8,12 @@ import com.vass.example.kmmapp.data.remote.datastore.QuotesApiRemoteDataSource
 import com.vass.example.kmmapp.data.remote.datastore.RemoteDataSource
 import com.vass.example.kmmapp.data.repository.QuotesRepository
 import com.vass.example.kmmapp.data.repository.QuotesRepositoryImpl
-import com.vass.example.kmmapp.domain.usecase.GetAnotherQuoteUseCase
 import com.vass.example.kmmapp.domain.usecase.GetAllQuotesUseCase
+import com.vass.example.kmmapp.domain.usecase.GetAnotherQuoteUseCase
 import com.vass.example.kmmapp.domain.usecase.ResetQuotesUseCase
+import com.vass.example.kmmapp.utils.logger.KMMLogger
+import com.vass.example.kmmapp.utils.logger.KMMLoggerImpl
+import com.vass.example.kmmappp.BuildKonfig
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
@@ -23,6 +26,7 @@ import org.koin.dsl.module
 
 val sharedModule = module {
     //Cosas que afectan al módulo shared
+    single { KMMLoggerImpl(BuildKonfig.platform.lowercase().contains("debug")) } bind KMMLogger::class
     factoryOf(::GetAnotherQuoteUseCase)
     factoryOf(::GetAllQuotesUseCase)
     factoryOf(::ResetQuotesUseCase)
@@ -44,5 +48,4 @@ val sharedModule = module {
             }
         }
     }
-
 }
