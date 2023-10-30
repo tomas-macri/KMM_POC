@@ -8,6 +8,6 @@ import sqldelight.vass.db.KMMDatabase
 
 internal actual class DatabaseDriverFactory {
     internal actual fun createDriver(): SqlDriver {
-        return AndroidSqliteDriver(KMMDatabase.Schema, getKoin().get() , "KMMDatabase")
+        return AndroidSqliteDriver(KMMDatabase.Schema, getKoin().get(), "KMMDatabase")
     }
 }

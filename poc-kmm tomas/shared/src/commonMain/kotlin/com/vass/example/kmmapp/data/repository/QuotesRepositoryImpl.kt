@@ -7,7 +7,7 @@ import com.vass.example.kmmapp.data.remote.datastore.RemoteDataSource
 internal class QuotesRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
-): QuotesRepository {
+) : QuotesRepository {
     override suspend fun getQuotes(): List<Quote> {
         return localDataSource.getQuotes()
     }

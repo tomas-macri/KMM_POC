@@ -16,9 +16,9 @@ internal interface LocalDataSource {
 internal class SQLLocalDataSource(
     private val queriesProvider: KMMDatabaseQueries,
     private val dispatcher: CoroutineDispatcher,
-): LocalDataSource{
+) : LocalDataSource {
     override suspend fun getQuotes(): List<Quote> {
-        return withContext(dispatcher){
+        return withContext(dispatcher) {
             queriesProvider.getQuotes().executeAsList().map {
                 Quote(it.id.toInt(), it.message, it.author)
             }
@@ -26,13 +26,13 @@ internal class SQLLocalDataSource(
     }
 
     override suspend fun insert(newQuote: Quote) {
-        withContext(dispatcher){
+        withContext(dispatcher) {
             queriesProvider.insertQuote(null, newQuote.quote, newQuote.author)
         }
     }
 
     override suspend fun resetQuotes() {
-        withContext(dispatcher){
+        withContext(dispatcher) {
             queriesProvider.resetQuotes()
         }
     }
