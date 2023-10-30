@@ -149,10 +149,10 @@ buildkonfig {
     }
 
     defaultConfigs("debug") {
-        buildConfigField(STRING, "apiUrl", "https://ffa.aakhilv.me")
+        buildConfigField(STRING, "apiUrl", "https://api.breakingbadquotes.xyz/v1/")
     }
     defaultConfigs("release") {
-        buildConfigField(STRING, "apiUrl", "https://ffa.aakhilv.you")
+        buildConfigField(STRING, "apiUrl", "https://api.breakingbadquotes.xyz/v1/")
     }
 
     targetConfigs("debug") {
