@@ -22,21 +22,30 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 
 @Composable
-fun LoadingDialog(){
+fun LoadingDialog() {
     Dialog(onDismissRequest = {}, properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)) {
 
-        Box(modifier = Modifier
-            .padding(24.dp)
-            .background(Color.Black, RoundedCornerShape(5.dp))
-            .fillMaxWidth()
-            .border( width = 3.dp,
-                color = Color.White,
-                shape = RoundedCornerShape(5.dp)
-            )
-            , contentAlignment = Alignment.Center) {
-            Column(modifier = Modifier.fillMaxWidth().padding(vertical = 24.dp)) {
-                Text(text = "LOADING...", modifier = Modifier.padding(16.dp).fillMaxWidth(), color = Color.White, textAlign = TextAlign.Center)
-                CircularProgressIndicator(modifier = Modifier.width(48.dp).fillMaxWidth().align(Alignment.CenterHorizontally), color = Color.White)
+        Box(
+            modifier = Modifier
+                .padding(24.dp)
+                .background(Color.Black, RoundedCornerShape(5.dp))
+                .fillMaxWidth()
+                .border(
+                    width = 3.dp,
+                    color = Color.White,
+                    shape = RoundedCornerShape(5.dp)
+                ), contentAlignment = Alignment.Center
+        ) {
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 24.dp)) {
+                Text(text = "LOADING...", modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(), color = Color.White, textAlign = TextAlign.Center)
+                CircularProgressIndicator(modifier = Modifier
+                    .width(48.dp)
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally), color = Color.White)
             }
 
         }
@@ -46,6 +55,6 @@ fun LoadingDialog(){
 
 @Preview(device = Devices.PIXEL_4, showSystemUi = true, showBackground = true)
 @Composable
-fun LoadingPreview(){
+fun LoadingPreview() {
     LoadingDialog()
 }
