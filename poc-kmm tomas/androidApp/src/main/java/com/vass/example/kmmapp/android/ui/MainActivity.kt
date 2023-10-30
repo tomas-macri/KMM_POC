@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import com.vass.example.kmmapp.android.ui.loading.LoadingDialog
 import com.vass.example.kmmapp.android.ui.theme.KMMAppTheme
 import com.vass.example.kmmapp.data.model.Quote
 import org.koin.androidx.compose.koinViewModel
@@ -55,24 +56,27 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun MainScreen(mainUiState: MainUiState, onClickAddQuote: () -> Unit, onClickResetQuotes: () -> Unit) {
     Column(modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.SpaceAround) {
-        if (!mainUiState.loading) {
-            if (mainUiState.quotes.isNotEmpty()) {
-                QuotesList(mainUiState.quotes)
-            } else {
-                Box(modifier = Modifier
+        if (mainUiState.quotes.isNotEmpty()) {
+            QuotesList(mainUiState.quotes)
+        } else {
+            Box(
+                modifier = Modifier
                     .fillMaxHeight(0.9f)
-                    .padding(16.dp), contentAlignment = Alignment.Center) {
-                    Text(text = "There are no quotes yet, add one with the button below", textAlign = TextAlign.Center)
-                }
+                    .padding(16.dp), contentAlignment = Alignment.Center
+            ) {
+                Text(text = "There are no quotes yet, add one with the button below", textAlign = TextAlign.Center)
             }
-            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.SpaceAround) {
-                Button(onClick = { onClickAddQuote() }) {
-                    Text(text = "Get another!")
-                }
-                Button(onClick = { onClickResetQuotes() }) {
-                    Text(text = "Clear quotes :(")
-                }
+        }
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.SpaceAround) {
+            Button(onClick = { onClickAddQuote() }, enabled = !mainUiState.loading) {
+                Text(text = "Get another!")
             }
+            Button(onClick = { onClickResetQuotes() }, enabled = !mainUiState.loading) {
+                Text(text = "Clear quotes :(")
+            }
+        }
+        if (mainUiState.loading) {
+            LoadingDialog()
         }
     }
 }
