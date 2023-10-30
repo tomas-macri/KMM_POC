@@ -12,14 +12,15 @@ internal class QuotesRepositoryImpl(
         return localDataSource.getQuotes()
     }
 
-    override suspend fun insert() {
+    override suspend fun insert(): Quote? {
         val newQuote = remoteDataSource.getQuote()
         newQuote?.let {
             localDataSource.insert(it)
         }
+        return newQuote
     }
 
-    override suspend fun resetQuotes() {
+    override suspend fun resetQuotes(): Boolean {
         return localDataSource.resetQuotes()
     }
 }

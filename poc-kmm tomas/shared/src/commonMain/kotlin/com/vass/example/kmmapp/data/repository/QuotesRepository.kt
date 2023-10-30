@@ -6,7 +6,7 @@ import com.vass.example.kmmapp.data.model.Quote
 interface QuotesRepository {
     suspend fun getQuotes(): List<Quote>
 
-    suspend fun insert()
+    suspend fun insert(): Quote?
 
-    suspend fun resetQuotes()
+    suspend fun resetQuotes(): Boolean
 }

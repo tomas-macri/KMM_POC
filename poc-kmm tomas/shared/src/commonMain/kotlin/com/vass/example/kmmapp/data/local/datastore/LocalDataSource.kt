@@ -10,7 +10,7 @@ internal interface LocalDataSource {
 
     suspend fun insert(newQuote: Quote)
 
-    suspend fun resetQuotes()
+    suspend fun resetQuotes(): Boolean
 }
 
 internal class SQLLocalDataSource(
@@ -31,9 +31,10 @@ internal class SQLLocalDataSource(
         }
     }
 
-    override suspend fun resetQuotes() {
-        withContext(dispatcher) {
+    override suspend fun resetQuotes(): Boolean {
+        return withContext(dispatcher) {
             queriesProvider.resetQuotes()
+            return@withContext true
         }
     }
 
