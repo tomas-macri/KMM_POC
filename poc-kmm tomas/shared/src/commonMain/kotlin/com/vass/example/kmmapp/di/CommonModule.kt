@@ -31,8 +31,8 @@ val sharedModule = module {
 
     singleOf(::QuotesApiRemoteDataSource) bind RemoteDataSource::class
     single {
-        HttpClient{
-            install(ContentNegotiation){
+        HttpClient {
+            install(ContentNegotiation) {
                 json(Json {
                     prettyPrint = true
                     isLenient = true
