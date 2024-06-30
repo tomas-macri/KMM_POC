@@ -1,3 +1,3 @@
 # poc-kmm
 
-miguelangel.perez@vass.es
+KMM POC project
